@@ -1,8 +1,10 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import json
 import os
 
 app = Flask(__name__)
+CORS(app)
 
 # # Define the path to the JSON file
 # json_file_path = os.path.join(os.path.dirname(__file__), 'q-vercel-python.json')
