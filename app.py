@@ -14,7 +14,7 @@ def load_student_marks():
         with open(json_file_path, 'r') as f:
             return json.load(f)
     except FileNotFoundError:
-        return []
+        return [{"name": "Default", "marks": 0}] 
 
 
 @app.route('/', methods=['GET'])
