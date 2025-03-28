@@ -37,7 +37,7 @@ def get_marks():
         if student:
             marks.append(student["marks"])
         else:
-            marks.append(f"Student {name} not found")
+            marks.append(0)
 
     return jsonify({"marks": marks})
 
