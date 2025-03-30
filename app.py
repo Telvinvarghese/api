@@ -20,15 +20,15 @@ def get_marks():
     # Load student data from JSON file
     try:
         with open(json_file_path, 'r', encoding='utf-8') as file:
-            student_marks = json.load(file)
+            student_marks = json.load(file)  # Load the JSON as a Python list of dictionaries
     except (FileNotFoundError, json.JSONDecodeError):
         return jsonify({"error": "Failed to load student data"}), 500
 
-    # Look for the student marks in the list of dictionaries
-    marks = [
-        next((item["marks"] for item in student_marks if item["name"] == name), 0)
-        for name in names
-    ]
+    # Create a dictionary for faster lookups
+    marks_dict = {student["name"]: student["marks"] for student in student_marks}
+
+    # Retrieve marks for requested names, defaulting to 0 if not found
+    marks = [marks_dict.get(name, 0) for name in names]
 
     return jsonify({"marks": marks})
 
